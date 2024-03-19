@@ -86,7 +86,16 @@ function receiveVideo(userid, username){
 
     let options = {
         remoteVideo: video,
-        onicecandidate: onIceCandidate
+        onicecandidate: onIceCandidate,
+        configuration: {
+            iceServers: [
+                { 
+                    urls: 'turn:3.110.4.127:3478',
+                    username: 'coturn', 
+                    credential: 'coturn123'
+                }
+            ]
+        }
     }
 
     user.rtcPeer = kurentoUtils.WebRtcPeer.WebRtcPeerRecvonly(options, err => {
