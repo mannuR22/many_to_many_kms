@@ -167,6 +167,15 @@ function onExistingParticipants(userid, existingUsers){
         localVideo: video,
         onicecandidate: onIceCandidate,
         mediaConstraints: constraints,
+        configuration: {
+            iceServers: [
+                { 
+                    urls: 'turn:3.110.4.127:3478',
+                    username: 'coturn', 
+                    credential: 'coturn123'
+                }
+            ]
+        }
 
     }
 

@@ -118,6 +118,16 @@ function joinRoom(socket, username, roomname, callback) {
             })
 
             myRoom.participants[user.id] = user;
+            
+            if (existingUsers.length === 0) {
+                existingUsers.forEach(existingUser => {
+                    existingUser.outgoingMedia.connect(user.incomingMedia[existingUser.id]);
+                });
+            } else {
+                const initiator = existingUsers[0];
+                const initiatorIncomingMedia = initiator.incomingMedia[user.id];
+                user.outgoingMedia.connect(initiatorIncomingMedia);
+            }
         } catch (err) {
             console.log("Error occured while creating WebRtcEndpoint")
             return callback(err);
